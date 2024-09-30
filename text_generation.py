@@ -22,7 +22,7 @@ def generate_text(model, tokenizer, input_text, max_sequence_len, num_words_to_g
     return input_text
 
 # Provide a prompt for the model to generate text
-input_prompt = "Alice was"
-max_sequence_len = 20  # Adjust according to the maximum sequence length used during training
+input_prompt = "Alice replied thoughtfully, 'I wonder if..."
+max_sequence_len = 50  # Adjust according to the maximum sequence length used during training
 generated_text = generate_text(model, tokenizer, input_prompt, max_sequence_len)
 print(generated_text)

@@ -8,12 +8,12 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import LSTM, Embedding, Dense
 import pickle
 
-# Step 1: Download text from Project Gutenberg
-url = "https://www.gutenberg.org/files/11/11-0.txt"  # Alice's Adventures in Wonderland
+# Getting the text from Project Gutenberg from Url directly
+url = "https://www.gutenberg.org/files/11/11-0.txt"  
 response = requests.get(url)
 text = response.text
 
-# Step 2: Clean the downloaded text
+# Preprocessing the text
 def preprocess_text(text):
     # Remove the Project Gutenberg header/footer
     start_index = text.find("CHAPTER I")
@@ -27,7 +27,7 @@ def preprocess_text(text):
 
 cleaned_text = preprocess_text(text)
 
-# Step 3: Tokenize the text
+# Converting text into tokens
 tokenizer = Tokenizer()
 tokenizer.fit_on_texts([cleaned_text])
 total_words = len(tokenizer.word_index) + 1
@@ -49,7 +49,7 @@ X = input_sequences[:, :-1]
 y = input_sequences[:, -1]
 y = to_categorical(y, num_classes=total_words)
 
-# Step 4: Build the model
+# model Building
 model = Sequential()
 model.add(Embedding(input_dim=total_words, output_dim=100, input_length=max_sequence_len-1))
 model.add(LSTM(150, return_sequences=True))
